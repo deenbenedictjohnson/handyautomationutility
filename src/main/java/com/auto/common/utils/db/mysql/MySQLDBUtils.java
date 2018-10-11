@@ -88,7 +88,7 @@ public class MySQLDBUtils {
 	 * @param query
 	 * @param conn
 	 * @return
-	 * @throws Exception
+	 * @throws SQLException
 	 */
 	public static boolean executeUpdateQuery(String query, Connection conn) throws SQLException {
 		Statement statement = null;

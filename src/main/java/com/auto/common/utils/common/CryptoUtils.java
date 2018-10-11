@@ -62,7 +62,6 @@ public class CryptoUtils {
 	 *
 	 * @param value
 	 * @return
-	 * @
 	 */
 	public static String encrypt(final String value) {
 		try {
