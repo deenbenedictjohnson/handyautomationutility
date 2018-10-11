@@ -6,12 +6,56 @@
 	<artifactId>com.github.deenbenedictjohnson</artifactId>
 	<version>2.1.6-SNAPSHOT</version>
 
+	<name>Dependent Tasks Executor Core</name>
+	<description>Executing dependent/Independent tasks in a reliable way, is made so easy that even your grandma can do it.</description>
+	<url>https://github.com/dexecutor/dexecutor-core</url>
+
+	<organization>
+		<url>https://github.com/dexecutor</url>
+		<name>Dexecutor</name>
+	</organization>
+	<inceptionYear>2016</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Benedict Johnson</name>
+			<email>benedictjohnsoncareer@gmail.com</email>
+			<organization>techstars</organization>
+			<organizationUrl>https://github.com/deenbenedictjohnson</organizationUrl>
+			<timezone>UTC+05:30</timezone>
+		</developer>
+	</developers>
+
 	<scm>
 		<connection>scm:git:git://github.com/deenbenedictjohnson/handyautomationutility.git</connection>
 		<developerConnection>scm:git:git@github.com:deenbenedictjohnson/handyautomationutility.git</developerConnection>
 		<url>https://github.com/deenbenedictjohnson/handyautomationutility</url>
 		<tag>HEAD</tag>
 	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/deenbenedictjohnson/handyautomationutility</url>
+	</issueManagement>
+
 
 	<dependencies>
 		<dependency>
@@ -313,17 +357,5 @@
 			</build>
 		</profile>
 	</profiles>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
-			</url>
-		</repository>
-	</distributionManagement>
-
+	
 </project>
