@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.deenbenedictjohnson</groupId>
 	<artifactId>com.automation.utilities</artifactId>
-	<version>2.1.9-SNAPSHOT</version>
+	<version>2.1.10</version>
 
 	<name>Handy Automation Utilities</name>
 	<description>Providing Handy Utilities for Automation</description>
@@ -36,7 +36,7 @@
 		<connection>scm:git:git://github.com/deenbenedictjohnson/handyautomationutility.git</connection>
 		<developerConnection>scm:git:git@github.com:deenbenedictjohnson/handyautomationutility.git</developerConnection>
 		<url>https://github.com/deenbenedictjohnson/handyautomationutility</url>
-		<tag>HEAD</tag>
+		<tag>2.1.10</tag>
 	</scm>
 
 	<distributionManagement>
