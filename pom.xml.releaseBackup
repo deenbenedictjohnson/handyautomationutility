@@ -3,22 +3,23 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.deenbenedictjohnson</groupId>
-	<artifactId>com.automation.utilities</artifactId>
-	<version>2.1.8-SNAPSHOT</version>
+	<artifactId>com.github.deenbenedictjohnson</artifactId>
+	<version>2.1.6-SNAPSHOT</version>
 
-	<name>Handy Automation Utilities</name>
-	<description>Providing Handy Utilities for Automation</description>
-	<url>https://github.com/deenbenedictjohnson/handyautomationutility</url>
+	<name>Dependent Tasks Executor Core</name>
+	<description>Executing dependent/Independent tasks in a reliable way, is made so easy that even your grandma can do it.</description>
+	<url>https://github.com/dexecutor/dexecutor-core</url>
 
 	<organization>
-		<url>hhttps://github.com/deenbenedictjohnson</url>
+		<url>https://github.com/dexecutor</url>
 		<name>Dexecutor</name>
 	</organization>
-	<inceptionYear>2018</inceptionYear>
+	<inceptionYear>2016</inceptionYear>
 
 	<licenses>
 		<license>
-			<name>Tech Quality Stars</name>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
 
