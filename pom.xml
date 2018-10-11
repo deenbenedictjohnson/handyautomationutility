@@ -3,13 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.deenbenedictjohnson</groupId>
 	<artifactId>com.github.deenbenedictjohnson</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 
 	<scm>
 		<connection>scm:git:git://github.com/deenbenedictjohnson/handyautomationutility.git</connection>
 		<developerConnection>scm:git:git@github.com:deenbenedictjohnson/handyautomationutility.git</developerConnection>
 		<url>https://github.com/deenbenedictjohnson/handyautomationutility</url>
-		<tag>rel1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<dependencies>
