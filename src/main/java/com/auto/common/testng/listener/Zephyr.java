@@ -6,9 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author "Tejas Sonchhatra"
- * <p/>
- * project codeName : Kal-El created on 19 Feb 2016
+ *
+ *
  */
 
 @Target(value = ElementType.METHOD)

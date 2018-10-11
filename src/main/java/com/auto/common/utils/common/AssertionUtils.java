@@ -11,8 +11,10 @@ public class AssertionUtils {
 
 	/**
 	 * This method asserts 2 JsonArray irrespective of order
+	 * @param firstElement
+	 * @param secondElement
+	 * @return
 	 */
-
 	public static boolean assertEqualsNoOrder(final JSONArray firstElement, final JSONArray secondElement) {
 		Assert.assertEquals(firstElement.length(), secondElement.length());
 
@@ -27,10 +29,13 @@ public class AssertionUtils {
 		return secondList.containsAll(firstList);
 	}
 
+
 	/**
 	 * This method asserts 2 StringArray irrespective of order
+	 * @param firstArray
+	 * @param secondArray
+	 * @return
 	 */
-
 	public static boolean assertEqualsNoOrder(final String[] firstArray, final String[] secondArray) {
 		Assert.assertEquals(firstArray.length, secondArray.length);
 

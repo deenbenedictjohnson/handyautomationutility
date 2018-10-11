@@ -19,6 +19,10 @@ import org.testng.ISuiteListener;
 
 import com.auto.common.utils.api.JerseyRestClientHelper;
 
+/**
+ *
+ * It updates the test results in the Zephyr JIRA
+ */
 public class ZephyrResultUpdateListener implements ISuiteListener {
 
 	private static JSONArray jsonArrayExecutions;

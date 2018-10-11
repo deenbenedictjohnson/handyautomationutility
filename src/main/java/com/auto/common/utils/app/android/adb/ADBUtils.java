@@ -28,6 +28,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Menu button
+	 * @param androidPath
 	 */
 	public static void clickAndroidMenu(final String androidPath) {
 		try {
@@ -40,6 +41,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Home button
+	 * @param androidPath
 	 */
 	public static void clickAndroidHome(final String androidPath) {
 		try {
@@ -53,6 +55,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Task Manager button
+	 * @param androidPath
 	 */
 	public static void clickAndroidRecentApps(final String androidPath) {
 		try {
@@ -65,6 +68,7 @@ public class ADBUtils {
 
 	/**
 	 * Android back button
+	 * @param androidPath
 	 */
 	public static void clickAndroidBack(final String androidPath) {
 		try {
@@ -77,6 +81,7 @@ public class ADBUtils {
 
 	/**
 	 * Android power button
+	 * @param androidPath
 	 */
 	public static void clickAndroidPower(final String androidPath) {
 		try {
@@ -89,6 +94,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Status Bar
+	 * @param androidPath
 	 */
 	public static void expandStatusBar(final String androidPath) {
 		try {
@@ -100,7 +106,8 @@ public class ADBUtils {
 	}
 
 	/**
-	 * Android Status Bar
+	 * Android Safe mode
+	 * @param androidPath
 	 */
 	public static void goSafeMode(final String androidPath) {
 		try {
