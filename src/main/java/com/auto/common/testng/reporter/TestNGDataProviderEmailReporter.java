@@ -71,9 +71,6 @@ public class TestNGDataProviderEmailReporter extends TestListenerAdapter impleme
 			sBuilder[2] = new StringBuilder();
 		}
 		sBuilder[1] = sBuilder[1].append(getSummaryReport(result, "skipped"));
-		//System.out.println(result.getName());
-		//PricingTestData pricingTestData = (PricingTestData) result.getParameters()[0];
-		//System.out.println("Pricing Test data :: "+pricingTestData);
 	}
 
 	/**
@@ -91,22 +88,19 @@ public class TestNGDataProviderEmailReporter extends TestListenerAdapter impleme
 			sBuilder[2] = new StringBuilder();
 		}
 		sBuilder[0] = sBuilder[0].append(getSummaryReport(result, "failed"));
-		//System.out.println(result.getName());
-		//PricingTestData pricingTestData = (PricingTestData) result.getParameters()[0];
-		//System.out.println("Pricing Test data :: "+pricingTestData);
 	}
 
 	public void generateReport(List<XmlSuite> arg0, List<ISuite> suites, String outdir) {
-		System.out.println("****** generateReport");
+		logger.info("Generating Email Report");
 		try {
 			outputDir = "target/custom-test-reports";
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} catch (Exception error) {
+			logger.error("The exception in generateReport is : " + error);
 		}
 		try {
 			f_out = createWriter(outputDir);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException error) {
+			logger.error("The exception in generateReport is : " + error);
 		}
 		startHtmlPage(f_out);
 		generateTestExecutionStatus(suites);
@@ -210,8 +204,8 @@ public class TestNGDataProviderEmailReporter extends TestListenerAdapter impleme
 					suite_passPercentage = nf
 							.format(((float) suite_totalPassedMethods / (float) (suite_totalPassedMethods
 									+ suite_totalFailedMethods + suite_totalSkippedMethods)) * 100);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
+				} catch (NumberFormatException error) {
+					logger.error("The exception in generateTestExecutionStatus is : " + error);
 				}
 			}
 		}
@@ -440,11 +434,11 @@ public class TestNGDataProviderEmailReporter extends TestListenerAdapter impleme
 
 			String SLNUM = "<SLNUM>";
 			try {
-				jiraURL = "https://jira.corp.olacabs.com";
-				testlinkURL = "https://jira.corp.olacabs.com";
+				jiraURL = "";
+				testlinkURL = "";
 				testlinkPrefix = "OSP";
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (Exception error) {
+				logger.error("The exception in generateTestExecutionStatus is :: " + error);
 			}
 
 			int count = 1;

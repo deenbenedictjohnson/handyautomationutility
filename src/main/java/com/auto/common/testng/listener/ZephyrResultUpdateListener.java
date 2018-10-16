@@ -20,7 +20,6 @@ import org.testng.ISuiteListener;
 import com.auto.common.utils.api.JerseyRestClientHelper;
 
 /**
- *
  * It updates the test results in the Zephyr JIRA
  */
 public class ZephyrResultUpdateListener implements ISuiteListener {
@@ -73,8 +72,8 @@ public class ZephyrResultUpdateListener implements ISuiteListener {
 							String issueId = issueIds[count];
 							id = getExecutionIdFromIssueID(issueId);
 							sendStatus(id, zapiResultInt);
-						} catch (JSONException e) {
-							e.printStackTrace();
+						} catch (JSONException error) {
+							logger.error("The json exception is :: " + error);
 						}
 						// send the status to Zephyr
 					}
@@ -86,8 +85,7 @@ public class ZephyrResultUpdateListener implements ISuiteListener {
 	/**
 	 * Adding testcase to the test cycle of the Zephyr
 	 *
-	 * @param issueIds
-	 *         The String array of issue ids
+	 * @param issueIds The String array of issue ids
 	 */
 	public void addTestsToCycle(String[] issueIds) {
 		JSONObject jsonObject = new JSONObject();
@@ -115,10 +113,8 @@ public class ZephyrResultUpdateListener implements ISuiteListener {
 	/**
 	 * This method maps the TestNG result integer with Zephyr status integer
 	 *
-	 * @param result
-	 *         The result code
-	 * @return
-	 *         The result code to publish
+	 * @param result The result code
+	 * @return The result code to publish
 	 */
 	private int getResultStateToPublish(int result) {
 		switch (result) {

@@ -144,7 +144,7 @@ public class SendEmail {
 				content = content + "<td bgcolor=\"#80ccff\"><b>" + skippedCount + "</b></td></tr>";
 				message.setSubject(reportProperty.getProperty(PROJECT_NAME) + " Report in " + reportProperty.getProperty(ENV) + " environment");
 
-				String note = "Refer the detailed report <u> http://10.20.96.28:8080/view/Automation/job/" + reportProperty.getProperty(PROJECT_NAME) + "/Share_Automation_Results</u><br>";
+				String note = "Refer the detailed report <u> http://10.20.96.28:8080/view/Automation/job/" + reportProperty.getProperty(PROJECT_NAME) + "/Automation_Results</u><br>";
 				note = note + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Further details refer this link " + reportProperty.getProperty("report_url") + "</u>";
 
 				message.setContent("<html>" +
@@ -185,7 +185,6 @@ public class SendEmail {
 
 				logger.debug("Sent report to email successfully");
 			} catch (MessagingException error) {
-				error.printStackTrace();
 				logger.error("The exception is : " + error);
 			}
 		}
@@ -254,7 +253,6 @@ public class SendEmail {
 			Transport.send(message);
 			logger.debug("Sent report to email successfully");
 		} catch (MessagingException error) {
-			error.printStackTrace();
 			logger.error("The exception is : " + error);
 		}
 

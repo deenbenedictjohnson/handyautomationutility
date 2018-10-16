@@ -1,5 +1,7 @@
 package com.auto.data.model;
 
+import static com.auto.common.constants.CommonConstants.DEFAULT;
+
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,12 +71,12 @@ public class Employee {
 			this.empId = empId;
 			this.empName = empName;
 			this.age = age;
-			this.company = "default";
-			this.panNo = "default";
-			this.aadharNo = "default";
-			this.address = "default";
-			this.fatherName = "default";
-			this.motherName = "default";
+			this.company = DEFAULT;
+			this.panNo = DEFAULT;
+			this.aadharNo = DEFAULT;
+			this.address = DEFAULT;
+			this.fatherName = DEFAULT;
+			this.motherName = DEFAULT;
 			this.pincode = 5603;
 
 		}

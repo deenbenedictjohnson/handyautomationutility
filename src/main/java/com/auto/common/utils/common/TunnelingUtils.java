@@ -133,7 +133,6 @@ public class TunnelingUtils {
 			return new Pair<>(dbPort, session.openChannel("exec"));
 		} catch (JSchException error) {
 			logger.error("The exception occurred in this method create channel is  : " + error);
-			error.printStackTrace();
 			return null;
 		}
 	}
@@ -207,7 +206,6 @@ public class TunnelingUtils {
 			return sBuffer.toString().contains(expected);
 		} catch (Exception error) {
 			logger.error("The exception occurred in this method read logs is  : " + error);
-			error.printStackTrace();
 			return false;
 		}
 	}
@@ -264,7 +262,6 @@ public class TunnelingUtils {
 			return sBuffer;
 		} catch (Exception error) {
 			logger.error("The exception occurred in this method returnString is  : " + error);
-			error.printStackTrace();
 			return null;
 		}
 	}
@@ -313,7 +310,6 @@ public class TunnelingUtils {
 			return sBuffer;
 		} catch (Exception error) {
 			logger.error("The exception occurred in this method returnString is  : " + error);
-			error.printStackTrace();
 			return null;
 		}
 	}

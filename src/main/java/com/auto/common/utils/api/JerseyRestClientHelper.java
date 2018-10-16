@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2018 TechStars and/or its affiliates. All rights reserved.
+ *
+ */
+
 package com.auto.common.utils.api;
 
 import java.util.Map;
@@ -23,6 +28,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
 
+/**
+ * This class is used to interact with an api using jersey rest client
+ *
+ * @author Benedict Johnson
+ */
 public class JerseyRestClientHelper {
 
 	static Logger logger = LoggerFactory.getLogger(JerseyRestClientHelper.class);

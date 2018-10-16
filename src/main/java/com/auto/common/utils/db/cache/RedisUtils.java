@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
@@ -13,6 +15,9 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisUtils {
 
+	private static final String NORMAL = "normal";
+	private static final String CLUSTER = "cluster";
+	private static Logger logger = LoggerFactory.getLogger(RedisUtils.class);
 	private static RedisUtils redisCacheCluster = null;
 	private static JedisPoolConfig jedisPoolConfig;
 	private int permanentTTl = 60 * 60 * 24;
@@ -77,10 +82,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedis = connectToJedis(redisHost, redisPort);
 					value = jedis.getResource().keys(key);
 					jedis.close();
@@ -91,8 +96,8 @@ public class RedisUtils {
 					jedis.close();
 					break;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception error) {
+			logger.error("The exception in getkeys method is : " + error);
 		}
 		return value;
 	}
@@ -110,10 +115,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					jedisCluster.del(key);
 					jedisCluster.close();
@@ -125,7 +130,7 @@ public class RedisUtils {
 					break;
 			}
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in delKey method is : " + error);
 		}
 	}
 
@@ -144,10 +149,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					for (int i = 0; i < value.length; i++) {
 						jedisCluster.lrem(key, count, value[i]);
@@ -163,7 +168,7 @@ public class RedisUtils {
 					break;
 			}
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in lRemove method is : " + error);
 		}
 	}
 
@@ -181,10 +186,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					jedisCluster.rpush(key, value);
 					jedisCluster.close();
@@ -196,7 +201,7 @@ public class RedisUtils {
 					break;
 			}
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in rPush method is : " + error);
 		}
 	}
 
@@ -214,10 +219,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					jedisCluster.set(key, value[0]);
 					jedisCluster.close();
@@ -229,7 +234,7 @@ public class RedisUtils {
 					break;
 			}
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in updateKey method is : " + error);
 		}
 	}
 
@@ -248,10 +253,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					ttl = jedisCluster.ttl(key);
 					jedisCluster.close();
@@ -264,7 +269,7 @@ public class RedisUtils {
 			}
 			return ttl;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in getTtl method is : " + error);
 		}
 		return null;
 	}
@@ -284,10 +289,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					keyType = jedisCluster.type(key);
 					jedisCluster.close();
@@ -300,7 +305,7 @@ public class RedisUtils {
 			}
 			return keyType;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in getType method is : " + error);
 		}
 		return null;
 	}
@@ -323,10 +328,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					if (jedisCluster.exists(key).booleanValue() == true) {
 						keyType = jedisCluster.type(key);
@@ -411,7 +416,7 @@ public class RedisUtils {
 			}
 			return value;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in getValues method is : " + error);
 			return value;
 		}
 	}
@@ -422,10 +427,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					noOfRecordsUpdated = jedisCluster.hset(key, field, value).intValue();
 					jedisCluster.close();
@@ -438,7 +443,7 @@ public class RedisUtils {
 			}
 			return noOfRecordsUpdated;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in Hset method is : " + error);
 		}
 		return noOfRecordsUpdated;
 	}
@@ -449,10 +454,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					if (jedisCluster.exists(key).booleanValue() == true) {
 						jedisCluster = connectToJedisCluster(redisHost, redisPort);
 						value = jedisCluster.hkeys(key);
@@ -473,7 +478,7 @@ public class RedisUtils {
 			}
 			return value;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in getHMKeys method is : " + error);
 		}
 		return null;
 	}
@@ -494,10 +499,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedis = connectToJedis(redisHost, redisPort);
 					value = jedis.getResource().keys(key);
 					jedis.close();
@@ -519,7 +524,6 @@ public class RedisUtils {
 				default:
 					jedis = connectToJedis(redisHost, redisPort);
 					value = jedis.getResource().keys(key);
-					System.out.println("values  *****   : " + value.toString());
 					if (value.size() > 0) {
 						String[] keyL = value.toArray(new String[value.size()]);
 						deletedCount = jedis.getResource().del(keyL);
@@ -528,7 +532,7 @@ public class RedisUtils {
 					break;
 			}
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in deleKeys method is : " + error);
 		}
 		return deletedCount;
 	}
@@ -540,10 +544,10 @@ public class RedisUtils {
 			JedisPool jedis = null;
 			JedisCluster jedisCluster = null;
 			if (type == null) {
-				type = "normal";
+				type = NORMAL;
 			}
 			switch (type) {
-				case "cluster":
+				case CLUSTER:
 					jedisCluster = connectToJedisCluster(redisHost, redisPort);
 					value = jedisCluster.getClusterNodes().keySet();
 					if (value.size() > 0) {
@@ -562,7 +566,6 @@ public class RedisUtils {
 				default:
 					jedis = connectToJedis(redisHost, redisPort);
 					value = jedis.getResource().keys(key);
-					System.out.println("values  *****   : " + value.toString());
 					if (value.size() > 0) {
 						String[] keyL = value.toArray(new String[value.size()]);
 						deletedCount = jedis.getResource().del(keyL);
@@ -571,7 +574,7 @@ public class RedisUtils {
 					break;
 			}
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in deleKeysFromCluster method is : " + error);
 		}
 		return deletedCount;
 	}
@@ -582,7 +585,8 @@ public class RedisUtils {
 			if (largeTTl > 0) {
 				permanentTTl = Integer.valueOf(largeTTl);
 			}
-		} catch (Exception e) {
+		} catch (Exception error) {
+			logger.error("The exception in init method is : " + error);
 		}
 	}
 
@@ -592,8 +596,9 @@ public class RedisUtils {
 			jedisPoolConfig.setMaxIdle(100);
 			jedisPoolConfig.setMaxTotal(100);
 			return jedisPoolConfig;
-		} catch (Exception e) {
-			throw new RuntimeException("Jedis Pool config", e);
+		} catch (Exception error) {
+			logger.error("The exception in getJedisPoolConfig method is : " + error);
+			throw new RuntimeException("Jedis Pool config", error);
 		}
 	}
 }

@@ -28,6 +28,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Menu button
+	 *
 	 * @param androidPath
 	 */
 	public static void clickAndroidMenu(final String androidPath) {
@@ -41,6 +42,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Home button
+	 *
 	 * @param androidPath
 	 */
 	public static void clickAndroidHome(final String androidPath) {
@@ -55,6 +57,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Task Manager button
+	 *
 	 * @param androidPath
 	 */
 	public static void clickAndroidRecentApps(final String androidPath) {
@@ -68,6 +71,7 @@ public class ADBUtils {
 
 	/**
 	 * Android back button
+	 *
 	 * @param androidPath
 	 */
 	public static void clickAndroidBack(final String androidPath) {
@@ -81,6 +85,7 @@ public class ADBUtils {
 
 	/**
 	 * Android power button
+	 *
 	 * @param androidPath
 	 */
 	public static void clickAndroidPower(final String androidPath) {
@@ -94,6 +99,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Status Bar
+	 *
 	 * @param androidPath
 	 */
 	public static void expandStatusBar(final String androidPath) {
@@ -107,6 +113,7 @@ public class ADBUtils {
 
 	/**
 	 * Android Safe mode
+	 *
 	 * @param androidPath
 	 */
 	public static void goSafeMode(final String androidPath) {
@@ -125,8 +132,8 @@ public class ADBUtils {
 			logger.debug("command is : " + inputstr);
 			p = Runtime.getRuntime().exec(inputstr);
 
-			InputStream cmdStdOut = null;
-			InputStream cmdStdErr = null;
+			InputStream cmdStdOut;
+			InputStream cmdStdErr;
 
 			cmdStdOut = p.getInputStream();
 			cmdStdErr = p.getErrorStream();
@@ -152,13 +159,11 @@ public class ADBUtils {
 			try {
 				p.waitFor();
 
-			} catch (InterruptedException error) {
+			} catch (Exception error) {
 				logger.error("The error in runAdbCommand interrupted : " + error);
-				error.printStackTrace();
 			}
 		} catch (IOException error) {
 			logger.error("The error in runAdbCommand : " + error);
-			error.printStackTrace();
 		}
 
 		return output;
@@ -184,7 +189,7 @@ public class ADBUtils {
 			}
 
 		} catch (IOException error) {
-			error.printStackTrace();
+			logger.error("The exception in command method is :: " + error);
 		}
 		return null;
 	}
@@ -192,18 +197,20 @@ public class ADBUtils {
 	public static String getIpAddress() {
 		try {
 			String resp = command("adb shell ip addr show wlan0");
-			String[] lines = resp.split(System.getProperty("line.separator"));
-			for (int count = 0; count < lines.length; count++) {
-				if (lines[count].contains("inet")) {
-					String[] values = lines[count].trim().split(" ");
-					String[] ipAddress = values[1].split("/");
-					logger.info("The device ip address is :: " + ipAddress[0]);
-					return ipAddress[0];
+			if (resp != null) {
+				String[] lines = resp.split(System.getProperty("line.separator"));
+				for (int count = 0; count < lines.length; count++) {
+					if (lines[count].contains("inet")) {
+						String[] values = lines[count].trim().split(" ");
+						String[] ipAddress = values[1].split("/");
+						logger.info("The device ip address is :: " + ipAddress[0]);
+						return ipAddress[0];
+					}
 				}
 			}
 			return null;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in getIpAddress method is :: " + error);
 		}
 		return null;
 	}

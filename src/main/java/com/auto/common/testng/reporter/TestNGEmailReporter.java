@@ -37,13 +37,13 @@ public class TestNGEmailReporter extends TestListenerAdapter implements IReporte
 	public void generateReport(List<XmlSuite> arg0, List<ISuite> suites, String outdir) {
 		try {
 			outputDir = "target/custom-test-reports";
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} catch (Exception error) {
+			logger.error("The exception in generateReport is :: " + error);
 		}
 		try {
 			f_out = createWriter(outputDir);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException error) {
+			logger.error("The exception in generateReport is :: " + error);
 		}
 		startHtmlPage(f_out);
 		generateTestExecutionStatus(suites);
@@ -147,8 +147,8 @@ public class TestNGEmailReporter extends TestListenerAdapter implements IReporte
 					suite_passPercentage = nf
 							.format(((float) suite_totalPassedMethods / (float) (suite_totalPassedMethods
 									+ suite_totalFailedMethods + suite_totalSkippedMethods)) * 100);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
+				} catch (NumberFormatException error) {
+					logger.error("The exception in generateTestExecutionStatus :: " + error);
 				}
 			}
 		}
@@ -362,11 +362,11 @@ public class TestNGEmailReporter extends TestListenerAdapter implements IReporte
 
 			String SLNUM = "<SLNUM>";
 			try {
-				jiraURL = "https://jira.corp.olacabs.com";
-				testlinkURL = "https://jira.corp.olacabs.com";
+				jiraURL = "";
+				testlinkURL = "";
 				testlinkPrefix = "OSP";
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (Exception error) {
+				logger.error("The exception occurred is :: " + error);
 			}
 
 			int count = 1;

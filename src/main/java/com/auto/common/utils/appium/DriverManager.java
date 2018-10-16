@@ -58,7 +58,7 @@ public final class DriverManager {
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 			return driver;
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception in initializeDriver is :: " + error);
 			return null;
 		}
 	}

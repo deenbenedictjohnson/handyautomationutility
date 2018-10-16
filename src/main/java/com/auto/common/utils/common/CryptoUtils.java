@@ -52,7 +52,7 @@ public class CryptoUtils {
 			return new String(decryptedByteValue, "utf-8");
 		} catch (Exception error) {
 			logger.error("The error occurred during decryption is : " + error);
-			error.printStackTrace();
+
 		}
 		return null;
 	}

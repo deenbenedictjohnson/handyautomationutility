@@ -27,6 +27,7 @@ public class CommonConstants {
 	public static final String GET_METHOD = "GET";
 	public static final String POST_METHOD = "POST";
 	public static final String RESPONSE_TYPE = "application/json";
+	public static final String DEFAULT = "default";
 	public static int JOB_ID = 0;
 	public static boolean NODE_SERVER_STATUS = false;
 

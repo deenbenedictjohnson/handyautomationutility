@@ -3,7 +3,12 @@ package com.auto.common.utils.common;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ShellScriptUtils {
+
+	private static Logger logger = LoggerFactory.getLogger(ShellScriptUtils.class);
 
 	public static String executeCommand(String command) {
 
@@ -21,8 +26,8 @@ public class ShellScriptUtils {
 				output.append(line + "\n");
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception error) {
+			logger.error("The exception in convertToStringArrayList is :: " + error);
 		}
 
 		return output.toString();

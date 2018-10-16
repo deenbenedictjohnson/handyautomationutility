@@ -2,7 +2,6 @@ package com.auto.common.utils.db.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class MySQLDBUtils {
 			Class.forName(dbDriver);
 			conn = DriverManager.getConnection(dbHost, userName, password);
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The exception for the mysql db connection is {0} :: ", error);
 		}
 		return conn;
 	}
@@ -54,8 +53,14 @@ public class MySQLDBUtils {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = conn.createStatement();
-			resultSet = statement.executeQuery(query);
+			try {
+				statement = conn.createStatement();
+				resultSet = statement.executeQuery(query);
+			} finally {
+				if (statement != null) {
+					statement.close();
+				}
+			}
 
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int columnsNumber = metaData.getColumnCount();
@@ -67,16 +72,12 @@ public class MySQLDBUtils {
 				}
 				responseList.add(response);
 			}
-			logger.debug("The table value :: " + responseList);
+			logger.debug(String.format("The table value is %s ", responseList.toString()));
 		} catch (Exception error) {
-			logger.error("The exception in executeQuery is : " + error);
-			error.printStackTrace();
+			logger.error("The exception in executeQuery is {0} ", error);
 		} finally {
 			if (resultSet != null) {
 				resultSet.close();
-			}
-			if (statement != null) {
-				statement.close();
 			}
 		}
 		return responseList;
@@ -95,9 +96,9 @@ public class MySQLDBUtils {
 
 		try {
 			statement = conn.createStatement();
-			return (statement.executeUpdate(query) >= 1) ? true : false;
+			return (statement.executeUpdate(query) >= 1);
 		} catch (Exception error) {
-			error.printStackTrace();
+			logger.error("The Exception in executeUpdateQuery method is {0} ", error);
 		} finally {
 			if (statement != null) {
 				statement.close();
@@ -106,27 +107,15 @@ public class MySQLDBUtils {
 		return false;
 	}
 
-	//To do
-	private static void updateExecuteQuery(String query, Map<Integer, String> values, String imei) throws SQLException {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-
-		try {
-			preparedStatement = conn.prepareStatement(query);
-			for (int count = 1; count <= values.size(); count++) {
-				preparedStatement.setString(count, values.get(count));
-			}
-			preparedStatement.executeUpdate();
-		} catch (SQLException error) {
-			logger.error("The exception in updateCityTaxiTable is : " + error);
-		} finally {
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		}
+	/**
+	 * This method is used to update the table
+	 *
+	 * @param query
+	 * @param values
+	 * @throws SQLException
+	 */
+	public static void updateExecuteQuery(String query, Map<Integer, String> values) throws SQLException {
+		//to do
 	}
 
 }

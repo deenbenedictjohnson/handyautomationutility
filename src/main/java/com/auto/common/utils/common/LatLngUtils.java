@@ -32,7 +32,6 @@ public class LatLngUtils {
 			return pointd;
 		} catch (Exception error) {
 			logger.error("Error in displaceAPoint : " + error);
-			error.printStackTrace();
 			return new LatLng(lat, lng);
 		}
 	}

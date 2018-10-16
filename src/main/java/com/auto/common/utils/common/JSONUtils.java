@@ -89,7 +89,7 @@ public class JSONUtils {
 				return (JSONArray) parser.parse(new FileReader(PATH + filePath));
 			}
 		} catch (ParseException | IOException error) {
-			error.printStackTrace();
+			logger.error("The exception in convertToStringArrayList is :: " + error);
 		}
 		return null;
 	}

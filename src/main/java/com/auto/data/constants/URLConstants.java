@@ -9,7 +9,6 @@ public class URLConstants {
 	public static final String HTTP = "http://";
 	public static final String HTTPS = "https://";
 	public static final String BASE_URL;
-
 	// Initializing properties
 	public static final PropertyUtils serverConfigProperties;
 
@@ -21,6 +20,10 @@ public class URLConstants {
 			serverConfigProperties = new PropertyUtils(PATH + "/config/stage/stage_server_config.properties");
 		}
 		BASE_URL = HTTP + serverConfigProperties.getProperty("baseURL");
+	}
+
+	private URLConstants() {
+		//do nothing
 	}
 
 

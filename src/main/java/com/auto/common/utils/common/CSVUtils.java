@@ -4,29 +4,50 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.auto.common.constants.CommonConstants;
-import com.auto.data.model.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 public class CSVUtils {
 
+	private static Logger logger = LoggerFactory.getLogger(CSVUtils.class);
+
 	private CSVUtils() {
 		//do nothing
 	}
 
-	public static Object[][] readCSVFile(final String filePath) {
+	/**
+	 * To read the csv file based on the file path
+	 *
+	 * @param filePath
+	 * @return
+	 */
+	public static Object[][] readCSVFile(final String filePath) throws IOException {
+		Reader reader = null;
+		CSVReader csvReader = null;
 		try {
 
-			Reader reader = Files.newBufferedReader(Paths.get(filePath));
-			CSVReader csvReader = new CSVReader(reader);
+			reader = Files.newBufferedReader(Paths.get(filePath));
 
 			// Reading All Records at once into a List<String[]>
-			List<String[]> csvData = csvReader.readAll();
+			List<String[]> csvData;
+
+			try {
+				csvReader = new CSVReader(reader);
+				csvData = csvReader.readAll();
+
+			} finally {
+				if (csvReader != null) {
+					csvReader.close();
+				}
+			}
 
 			Object[][] csvDataSet = new Object[csvData.size()][];
 
@@ -38,14 +59,28 @@ public class CSVUtils {
 			return csvDataSet;
 
 		} catch (IOException error) {
-			error.printStackTrace();
+			logger.error("The exception in readCSVFile is :: " + error);
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
 		}
 		return null;
 	}
 
-	public static void readCSVFile(final String filePath, final String className) {
+	/**
+	 * To read the csv file based on the filepath and the class name
+	 *
+	 * @param filePath
+	 * @param className
+	 * @return
+	 * @throws IOException
+	 */
+	public static Object[][] readCSVFile(final String filePath, final String className) throws IOException {
+		Reader reader = null;
 		try {
-			Reader reader = Files.newBufferedReader(Paths.get(filePath));
+
+			reader = Files.newBufferedReader(Paths.get(filePath));
 			Class classTemp = Class.forName(className);
 
 			CsvToBean csvToBean = new CsvToBeanBuilder(reader)
@@ -55,44 +90,34 @@ public class CSVUtils {
 
 			Iterator csvUserIterator = csvToBean.iterator();
 
-			System.out.println("==========================");
-			while (csvUserIterator.hasNext()) {
-				Employee employee = (Employee) csvUserIterator.next();
-				System.out.print("Employee : " + employee);
-			}
-			System.out.println("==========================");
 
+			List<Object> objectList = new ArrayList<>();
+
+			int count = 0;
+
+			while (csvUserIterator.hasNext()) {
+				objectList.add(csvUserIterator.next());
+				count++;
+			}
+
+			Object[][] csvDataSet = new Object[count][];
+
+			count = 0;
+			for (Object obj : objectList) {
+				Object[] object = new Object[1];
+				object[0] = obj;
+				csvDataSet[count++] = object;
+			}
+
+			return csvDataSet;
 		} catch (Exception error) {
 			error.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args) {
-
-		System.out.println(ExcelUtils.readFromExcel(CommonConstants.PATH + "/config/testdata/employee.xlsx"));
-
-		Object[][] objects = ExcelUtils.getTestDataFromExcel("com.auto.data.model.Employee", "/config/testdata/", "employee.xlsx");
-
-		for (Object[] obj : objects) {
-			for (Object object : obj) {
-				Employee employee = (Employee) object;
-				System.out.println(employee);
+		} finally {
+			if (reader != null) {
+				reader.close();
 			}
 		}
-
-		objects = readCSVFile(CommonConstants.PATH + "/config/testdata/employee_csv.csv");
-
-		System.out.println("***** CSV ******");
-		for (Object[] obj : objects) {
-			for (Object object : obj) {
-				System.out.print(object + "  ");
-			}
-			System.out.println();
-		}
-
-		readCSVFile(CommonConstants.PATH + "/config/testdata/employee_csv.csv", "com.auto.data.model.Employee");
-
-
+		return null;
 	}
 
 }
